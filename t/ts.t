@@ -12,6 +12,8 @@ use Test::PDL;
   is_pdl $a->filter_ma(2), pdl( '.6 1.2 2 3 4 5 6 7 7.8 8.4'), "filter moving average on $a";
   is_pdl $a->filter_exp(.8), pdl('0 0.8 1.76 2.752 3.7504 4.75008 5.750016 6.7500032 7.7500006 8.7500001'), "filter with exponential smoothing on $a";
   is_pdl $a->acf(5)->portmanteau($a->nelem), pdl( 11.1753902662994 ), "portmanteau significance test on $a";
+  is_pdl $a->acvf(5) / $a->acvf(0), $a->acf(5), "calculate autocorrelation from autocovariance on $a";
+  is_pdl $a->acf(0), pdl('1'), "first value of the autocorrelation function is always 1";
   my $b = pdl '1 2 3 4 5 6 7 9 9 10';
   is_pdl $b->mape($a), pdl( 0.302619047619048 ), "mean absolute percent error between $a and $b";
   is_pdl $b->mae($a), pdl( 1.1 ), "mean absolute error between $a and $b";

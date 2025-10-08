@@ -78,7 +78,7 @@ loop (h) %{
   PMCode => pp_line_numbers(__LINE__, <<'EOF'),
 sub PDL::acf {
   my ($self, $h) = @_;
-  $h ||= $self->dim(0) - 1;
+  $h //= $self->dim(0) - 1;
   PDL::_acf_int($self, my $r = PDL->null, $h+1);
   $r;
 }
@@ -133,7 +133,7 @@ loop (h) %{
   PMCode => pp_line_numbers(__LINE__, <<'EOF'),
 sub PDL::acvf {
   my ($self, $h) = @_;
-  $h ||= $self->dim(0) - 1;
+  $h //= $self->dim(0) - 1;
   PDL::_acvf_int($self, my $v = PDL->null, $h+1);
   $v;
 }
